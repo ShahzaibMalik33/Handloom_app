@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'filters_screen.dart';
 
 class BedsheetsScreen extends StatefulWidget {
   const BedsheetsScreen({super.key});
@@ -22,7 +23,7 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
       'rating': 4.8,
       'reviews': 124,
       'badge': 'Bestseller',
-      'image': 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1000&auto=format&fit=crop',
+      'image': 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop',
     },
     {
       'id': '2',
@@ -46,7 +47,7 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
       'rating': 4.6,
       'reviews': 88,
       'badge': '',
-      'image': 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?q=80&w=1000&auto=format&fit=crop',
+      'image': 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1000&auto=format&fit=crop',
     },
     {
       'id': '4',
@@ -58,7 +59,7 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
       'rating': 4.8,
       'reviews': 142,
       'badge': 'Bestseller',
-      'image': 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1000&auto=format&fit=crop',
+      'image': 'https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?q=80&w=1000&auto=format&fit=crop',
     },
     {
       'id': '5',
@@ -70,7 +71,7 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
       'rating': 4.7,
       'reviews': 76,
       'badge': '',
-      'image': 'https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?q=80&w=1000&auto=format&fit=crop',
+      'image': 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1000&auto=format&fit=crop',
     },
     {
       'id': '6',
@@ -82,17 +83,17 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
       'rating': 4.6,
       'reviews': 64,
       'badge': 'New',
-      'image': 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=1000&auto=format&fit=crop',
+      'image': 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=1000&auto=format&fit=crop',
     },
   ];
 
   final _categories = [
-    {'title': 'All', 'image': 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=200'},
+    {'title': 'All', 'image': 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=200'},
     {'title': 'Floral', 'image': 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=200'},
-    {'title': 'Block Print', 'image': 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=200'},
-    {'title': 'Jaipur', 'image': 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=200'},
-    {'title': 'Indigo', 'image': 'https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?w=200'},
-    {'title': 'Minimal', 'image': 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=200'},
+    {'title': 'Block Print', 'image': 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=200'},
+    {'title': 'Jaipur', 'image': 'https://images.unsplash.com/photo-1579656381226-5fc0f0100c3b?w=200'},
+    {'title': 'Indigo', 'image': 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=200'},
+    {'title': 'Minimal', 'image': 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=200'},
   ];
 
   @override
@@ -104,7 +105,7 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
         elevation: 0.5,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Color(0xFF1E293B)),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context), // Seamless back navigation
         ),
         title: Row(
           mainAxisSize: MainAxisSize.min,
@@ -135,7 +136,12 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Color(0xFF1E293B)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FiltersScreen()),
+              );
+            },
           ),
         ],
       ),
@@ -155,11 +161,6 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
                 color: Color(0xFFE5F3FF),
-                image: DecorationImage(
-                  image: NetworkImage('https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1000&auto=format&fit=crop'),
-                  fit: BoxFit.cover,
-                  opacity: 0.15,
-                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -258,25 +259,34 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
                       ],
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.grey.shade300),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.filter_list, size: 16, color: Color(0xFF1E293B)),
-                        const SizedBox(width: 6),
-                        Text('Filters', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500)),
-                        const SizedBox(width: 6),
-                        Container(
-                          padding: const EdgeInsets.all(5),
-                          decoration: const BoxDecoration(color: Color(0xFF0066B2), shape: BoxShape.circle),
-                          child: const Text('1', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold)),
-                        ),
-                      ],
+                  // Filters Button with Navigation to FiltersScreen
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const FiltersScreen()),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.grey.shade300),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.filter_list, size: 16, color: Color(0xFF1E293B)),
+                          const SizedBox(width: 6),
+                          Text('Filters', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500)),
+                          const SizedBox(width: 6),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: const BoxDecoration(color: Color(0xFF0066B2), shape: BoxShape.circle),
+                            child: const Text('1', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -292,7 +302,7 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 12,
-                  childAspectRatio: 0.62,
+                  childAspectRatio: 0.56,
                 ),
                 itemBuilder: (context, index) {
                   final item = _bedsheetsList[index];
@@ -311,7 +321,7 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
                               borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
                               child: Image.network(
                                 item['image'].toString(),
-                                height: 160,
+                                height: 150,
                                 width: double.infinity,
                                 fit: BoxFit.cover,
                               ),
@@ -364,13 +374,13 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
                               const SizedBox(height: 6),
                               Row(
                                 children: [
-                                  Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.blue, shape: BoxShape.circle)),
+                                  Container(width: 10, height: 10, decoration: const BoxDecoration(color: Colors.blue, shape: BoxShape.circle)),
                                   const SizedBox(width: 4),
-                                  Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle)),
+                                  Container(width: 10, height: 10, decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle)),
                                   const SizedBox(width: 4),
-                                  Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.pinkAccent, shape: BoxShape.circle)),
+                                  Container(width: 10, height: 10, decoration: const BoxDecoration(color: Colors.pinkAccent, shape: BoxShape.circle)),
                                   const SizedBox(width: 4),
-                                  Container(width: 12, height: 12, decoration: const BoxDecoration(color: Colors.amber, shape: BoxShape.circle)),
+                                  Container(width: 10, height: 10, decoration: const BoxDecoration(color: Colors.amber, shape: BoxShape.circle)),
                                 ],
                               ),
                               const SizedBox(height: 6),
@@ -386,15 +396,16 @@ class _BedsheetsScreenState extends State<BedsheetsScreen> {
                                 children: [
                                   Text(
                                     '₹${item['price']}',
-                                    style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.bold, color: const Color(0xFF0F172A)),
+                                    style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.bold, color: const Color(0xFF0F172A)),
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
                                     '₹${item['oldPrice']}',
-                                    style: GoogleFonts.inter(fontSize: 10, color: Colors.grey, decoration: TextDecoration.lineThrough),
+                                    style: GoogleFonts.inter(fontSize: 9, color: Colors.grey, decoration: TextDecoration.lineThrough),
                                   ),
                                 ],
                               ),
+                              const SizedBox(height: 2),
                               Text(
                                 item['discount'].toString(),
                                 style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green.shade700),

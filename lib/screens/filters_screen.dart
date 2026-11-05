@@ -11,6 +11,11 @@ class FiltersScreen extends StatefulWidget {
 class _FiltersScreenState extends State<FiltersScreen> {
   RangeValues _priceRange = const RangeValues(500, 5000);
 
+  bool _isBedsheets = true;
+  bool _isComforters = false;
+  bool _isDohars = false;
+  bool _isQuilts = false;
+
   bool _isSingle = false;
   bool _isDouble = false;
   bool _isQueen = true;
@@ -28,7 +33,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   bool _isInStock = true;
   bool _isOutOfStock = false;
 
-  int _selectedColorIndex = 5; // Default blue selected
+  int _selectedColorIndex = 5;
 
   final List<Color> _colors = [
     const Color(0xFFF5EBE6),
@@ -84,6 +89,8 @@ class _FiltersScreenState extends State<FiltersScreen> {
             onPressed: () {
               setState(() {
                 _priceRange = const RangeValues(500, 5000);
+                _isBedsheets = false;
+                _isComforters = false;
                 _isQueen = false;
                 _isFloral = false;
                 _is100Cotton = false;
@@ -117,29 +124,37 @@ class _FiltersScreenState extends State<FiltersScreen> {
               style: GoogleFonts.inter(fontSize: 12, color: const Color(0xFF64748B)),
             ),
             const SizedBox(height: 12),
-
-            // Active Filter Chips
             Wrap(
               spacing: 8,
               runSpacing: 8,
               children: [
+                _buildFilterChip('Bedsheets', true),
                 _buildFilterChip('Queen', true),
                 _buildFilterChip('Cotton', true),
                 _buildFilterChip('Blue', true),
-                _buildFilterChip('Floral', true),
               ],
             ),
             const SizedBox(height: 20),
-
-            // Category Section
-            _buildAccordionSection(
-              title: 'Category',
-              subtitle: 'Bedsheets',
+            ExpansionTile(
               initiallyExpanded: true,
+              tilePadding: EdgeInsets.zero,
+              title: Text('Category', style: GoogleFonts.merriweather(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xFF0F172A))),
+              children: [
+                GridView.count(
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  childAspectRatio: 4.5,
+                  children: [
+                    CheckboxListTile(title: const Text('Bedsheets'), value: _isBedsheets, onChanged: (v) => setState(() => _isBedsheets = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
+                    CheckboxListTile(title: const Text('Comforters'), value: _isComforters, onChanged: (v) => setState(() => _isComforters = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
+                    CheckboxListTile(title: const Text('Dohars'), value: _isDohars, onChanged: (v) => setState(() => _isDohars = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
+                    CheckboxListTile(title: const Text('Quilts'), value: _isQuilts, onChanged: (v) => setState(() => _isQuilts = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
+                  ],
+                ),
+              ],
             ),
             const Divider(height: 30),
-
-            // Price Range Section
             ExpansionTile(
               initiallyExpanded: true,
               tilePadding: EdgeInsets.zero,
@@ -163,44 +178,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     });
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade300),
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white,
-                          ),
-                          child: Text('₹ ${_priceRange.start.round()}', style: GoogleFonts.inter(fontSize: 14)),
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Text('–', style: TextStyle(fontSize: 18, color: Colors.grey)),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade300),
-                            borderRadius: BorderRadius.circular(8),
-                            color: Colors.white,
-                          ),
-                          child: Text('₹ ${_priceRange.end.round()}', style: GoogleFonts.inter(fontSize: 14)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
             const Divider(height: 30),
-
-            // Size Section
             ExpansionTile(
               initiallyExpanded: true,
               tilePadding: EdgeInsets.zero,
@@ -212,41 +192,15 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   childAspectRatio: 4.5,
                   children: [
-                    CheckboxListTile(
-                      title: const Text('Single'),
-                      value: _isSingle,
-                      onChanged: (val) => setState(() => _isSingle = val!),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                    CheckboxListTile(
-                      title: const Text('Double'),
-                      value: _isDouble,
-                      onChanged: (val) => setState(() => _isDouble = val!),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                    CheckboxListTile(
-                      title: const Text('Queen'),
-                      value: _isQueen,
-                      onChanged: (val) => setState(() => _isQueen = val!),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                    ),
-                    CheckboxListTile(
-                      title: const Text('King'),
-                      value: _isKing,
-                      onChanged: (val) => setState(() => _isKing = val!),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                    ),
+                    CheckboxListTile(title: const Text('Single'), value: _isSingle, onChanged: (val) => setState(() => _isSingle = val!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
+                    CheckboxListTile(title: const Text('Double'), value: _isDouble, onChanged: (val) => setState(() => _isDouble = val!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
+                    CheckboxListTile(title: const Text('Queen'), value: _isQueen, onChanged: (val) => setState(() => _isQueen = val!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
+                    CheckboxListTile(title: const Text('King'), value: _isKing, onChanged: (val) => setState(() => _isKing = val!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
                   ],
                 ),
               ],
             ),
             const Divider(height: 30),
-
-            // Colour Section
             ExpansionTile(
               initiallyExpanded: true,
               tilePadding: EdgeInsets.zero,
@@ -283,30 +237,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
               ],
             ),
             const Divider(height: 30),
-
-            // Pattern Section
-            ExpansionTile(
-              initiallyExpanded: true,
-              tilePadding: EdgeInsets.zero,
-              title: Text('Pattern', style: GoogleFonts.merriweather(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xFF0F172A))),
-              children: [
-                GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  childAspectRatio: 4.5,
-                  children: [
-                    CheckboxListTile(title: const Text('Floral'), value: _isFloral, onChanged: (v) => setState(() => _isFloral = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
-                    CheckboxListTile(title: const Text('Geometric'), value: _isGeometric, onChanged: (v) => setState(() => _isGeometric = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
-                    CheckboxListTile(title: const Text('Traditional'), value: _isTraditional, onChanged: (v) => setState(() => _isTraditional = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
-                    CheckboxListTile(title: const Text('Stripes'), value: _isStripes, onChanged: (v) => setState(() => _isStripes = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
-                  ],
-                ),
-              ],
-            ),
-            const Divider(height: 30),
-
-            // Material Section
             ExpansionTile(
               initiallyExpanded: true,
               tilePadding: EdgeInsets.zero,
@@ -321,26 +251,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     CheckboxListTile(title: const Text('100% Cotton'), value: _is100Cotton, onChanged: (v) => setState(() => _is100Cotton = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
                     CheckboxListTile(title: const Text('Organic Cotton'), value: _isOrganicCotton, onChanged: (v) => setState(() => _isOrganicCotton = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
                     CheckboxListTile(title: const Text('Cotton Blend'), value: _isCottonBlend, onChanged: (v) => setState(() => _isCottonBlend = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
-                  ],
-                ),
-              ],
-            ),
-            const Divider(height: 30),
-
-            // Availability Section
-            ExpansionTile(
-              initiallyExpanded: true,
-              tilePadding: EdgeInsets.zero,
-              title: Text('Availability', style: GoogleFonts.merriweather(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xFF0F172A))),
-              children: [
-                GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  childAspectRatio: 4.5,
-                  children: [
-                    CheckboxListTile(title: const Text('In Stock'), value: _isInStock, onChanged: (v) => setState(() => _isInStock = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
-                    CheckboxListTile(title: const Text('Out of Stock'), value: _isOutOfStock, onChanged: (v) => setState(() => _isOutOfStock = v!), controlAffinity: ListTileControlAffinity.leading, contentPadding: EdgeInsets.zero),
                   ],
                 ),
               ],
@@ -380,24 +290,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              height: 44,
-              child: OutlinedButton(
-                onPressed: () {
-                  setState(() {
-                    _isQueen = false;
-                    _isFloral = false;
-                  });
-                },
-                style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Color(0xFF0066B2)),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                ),
-                child: Text('Clear', style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.bold, color: const Color(0xFF0066B2))),
-              ),
-            ),
           ],
         ),
       ),
@@ -411,16 +303,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
       deleteIcon: const Icon(Icons.close, size: 14, color: Color(0xFF0066B2)),
       onDeleted: () {},
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: BorderSide.none),
-    );
-  }
-
-  Widget _buildAccordionSection({required String title, required String subtitle, required bool initiallyExpanded}) {
-    return ExpansionTile(
-      initiallyExpanded: initiallyExpanded,
-      tilePadding: EdgeInsets.zero,
-      title: Text(title, style: GoogleFonts.merriweather(fontSize: 16, fontWeight: FontWeight.bold, color: const Color(0xFF0F172A))),
-      subtitle: Text(subtitle, style: GoogleFonts.inter(fontSize: 13, color: const Color(0xFF64748B), fontWeight: FontWeight.w500)),
-      children: const [],
     );
   }
 }

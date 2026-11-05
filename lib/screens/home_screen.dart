@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'categories_screen.dart';
 import 'handloom_dedsheets.dart';
+import 'filters_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -37,6 +38,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.5,
+        automaticallyImplyLeading: false, // Allows smooth back flow if needed
         title: Row(
           children: [
             const Icon(Icons.local_florist, color: Color(0xFF0066B2), size: 28),
@@ -64,14 +66,19 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Color(0xFF1E293B)),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const FiltersScreen()),
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.grid_view, color: Color(0xFF0066B2)),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CategoriesScreen()),
+                MaterialPageRoute(builder: (context) => CategoriesScreen()),
               );
             },
           ),
@@ -89,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                   const Icon(Icons.location_pin, color: Color(0xFF0066B2), size: 18),
                   const SizedBox(width: 6),
                   Text(
-                    'Deliver to 560001, Bengaluru',
+                    'Deliver to Mainwali',
                     style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w500, color: const Color(0xFF1E293B)),
                   ),
                   const Icon(Icons.keyboard_arrow_down, size: 18, color: Colors.grey),
@@ -166,7 +173,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const CategoriesScreen()),
+                        MaterialPageRoute(builder: (context) => CategoriesScreen()),
                       );
                     },
                     child: Row(

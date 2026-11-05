@@ -25,7 +25,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     super.dispose();
   }
 
-  // Pure Frontend Navigation Handler
+  // Navigation to Home Screen after OTP verification
   void _handleVerifyOtp() {
     String otpCode = _controllers.map((c) => c.text).join();
     if (otpCode.length < 6) {
@@ -35,7 +35,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       return;
     }
 
-    // Directly navigate to Home Screen for frontend project
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -76,28 +75,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   color: const Color(0xFF1E293B),
                 ),
               ),
-              const SizedBox(height: 2),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(width: 25, height: 1, color: Colors.black45),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text(
-                      'ROOTED IN HOMES',
-                      style: GoogleFonts.inter(
-                        fontSize: 9,
-                        letterSpacing: 1.5,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  Container(width: 25, height: 1, color: Colors.black45),
-                ],
-              ),
               const SizedBox(height: 25),
-
               Text(
                 'Verify your number',
                 style: GoogleFonts.merriweather(
@@ -124,8 +102,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ),
               ),
               const SizedBox(height: 25),
-
-              // 6 OTP Input Boxes
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Row(
@@ -166,29 +142,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   }),
                 ),
               ),
-              const SizedBox(height: 15),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.access_time, size: 16, color: Color(0xFF64748B)),
-                  const SizedBox(width: 6),
-                  Text(
-                    'Resend code in ',
-                    style: GoogleFonts.inter(fontSize: 13, color: const Color(0xFF64748B)),
-                  ),
-                  Text(
-                    '00:59',
-                    style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF0084D6),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 25),
-
+              const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: SizedBox(
@@ -219,102 +173,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       ],
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 12),
-
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(
-                  'Change mobile number',
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: const Color(0xFF0084D6),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              // Bottom Section
-              SizedBox(
-                height: 220,
-                child: Stack(
-                  alignment: Alignment.bottomCenter,
-                  children: [
-                    Positioned.fill(
-                      child: Image.network(
-                        'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=1000&auto=format&fit=crop',
-                        fit: BoxFit.cover,
-                        alignment: Alignment.bottomCenter,
-                      ),
-                    ),
-                    Positioned.fill(
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              const Color(0xFFF4F9FF).withOpacity(0.0),
-                              const Color(0xFFF4F9FF),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Icon(Icons.headset_mic_outlined, size: 20, color: Color(0xFF1E293B)),
-                              const SizedBox(width: 10),
-                              Expanded(
-                                child: RichText(
-                                  text: TextSpan(
-                                    style: GoogleFonts.inter(fontSize: 12, color: const Color(0xFF64748B)),
-                                    children: const [
-                                      TextSpan(
-                                        text: 'Need help?\n',
-                                        style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
-                                      ),
-                                      TextSpan(text: 'If you didn’t receive the code, please check your SMS or '),
-                                      TextSpan(
-                                        text: 'contact our support team.',
-                                        style: TextStyle(
-                                          color: Color(0xFF0084D6),
-                                          decoration: TextDecoration.underline,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Divider(height: 20, color: Color(0xFFCBD5E1)),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(Icons.lock_outline, size: 14, color: Color(0xFF64748B)),
-                              const SizedBox(width: 6),
-                              Flexible(
-                                child: Text(
-                                  'Your number is safe with us. We never share your information.',
-                                  style: GoogleFonts.inter(fontSize: 9.5, color: const Color(0xFF64748B)),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ],

@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     super.dispose();
   }
 
-  // Pure Frontend Navigation Handler
+  // Navigation to OTP Screen
   void _handleContinue() {
     final phone = _phoneController.text.trim();
     if (phone.isEmpty || phone.length < 10) {
@@ -39,7 +39,6 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
 
     final fullPhoneNumber = '$_selectedCountryCode $phone';
 
-    // Directly navigate to OTP screen without any API call
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -291,102 +290,6 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                 const Icon(Icons.arrow_forward, size: 18, color: Colors.white),
                               ],
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            const Expanded(child: Divider(color: Color(0xFFCBD5E1))),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                              child: Text(
-                                'OR',
-                                style: GoogleFonts.inter(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF94A3B8),
-                                ),
-                              ),
-                            ),
-                            const Expanded(child: Divider(color: Color(0xFFCBD5E1))),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 48,
-                          child: OutlinedButton(
-                            onPressed: () {},
-                            style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              side: const BorderSide(color: Color(0xFFCBD5E1)),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.network(
-                                  'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg',
-                                  height: 20,
-                                  width: 20,
-                                  errorBuilder: (context, error, stackTrace) =>
-                                  const Icon(Icons.g_mobiledata, size: 24, color: Colors.red),
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  'Continue with Google',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color(0xFF1E293B),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF64748B)),
-                            children: const [
-                              TextSpan(text: 'By continuing, you agree to our\n'),
-                              TextSpan(
-                                text: 'Terms of Service',
-                                style: TextStyle(color: Color(0xFF0084D6), decoration: TextDecoration.underline),
-                              ),
-                              TextSpan(text: ' and '),
-                              TextSpan(
-                                text: 'Privacy Policy',
-                                style: TextStyle(color: Color(0xFF0084D6), decoration: TextDecoration.underline),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(height: 25),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Browse as a Guest',
-                                style: GoogleFonts.inter(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF0084D6),
-                                ),
-                              ),
-                              const SizedBox(width: 4),
-                              const Icon(
-                                Icons.arrow_forward,
-                                size: 16,
-                                color: Color(0xFF0084D6),
-                              ),
-                            ],
                           ),
                         ),
                         const SizedBox(height: 20),
